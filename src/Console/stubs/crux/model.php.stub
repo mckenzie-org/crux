@@ -1,0 +1,16 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Etlok\Crux\Traits\HasDefinition;
+use Etlok\Crux\Traits\HasUuids;
+use Illuminate\Support\Str;
+
+class {{ class }} extends Model
+{
+    use HasFactory, HasDefinition, HasUuids;
+    protected $table = '';
+    protected $fillable = [];
+}

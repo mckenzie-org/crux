@@ -1,0 +1,25 @@
+@extends('crux::layouts.app')
+
+@section('head')
+    <title></title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="">
+    <meta property="og:image" content="">
+    <meta property="og:url" content="">
+    <meta property="og:title" content="">
+    <link rel="canonical" href="" />
+@endsection
+
+@section('scripts')
+
+@endsection
+
+@section('content')
+    <crux-dashboard>
+        <crux-list :model="'{{$model??''}}'" :action="'show'" :id="'{{$id??''}}'"></crux-list>
+    </crux-dashboard>
+@endsection
+
