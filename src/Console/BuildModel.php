@@ -36,17 +36,4 @@ class BuildModel extends ModelMakeCommand
     {
         parent::handle();
     }
-
-    /**
-     * Get the console command options.
-     *
-     * @return array
-     */
-    protected function getOptions()
-    {
-        return [
-            ['force', null, InputOption::VALUE_NONE, 'Create the class even if the model already exists'],
-            ['migration', 'm', InputOption::VALUE_NONE, 'Create a new migration file for the model']
-        ];
-    }
 }

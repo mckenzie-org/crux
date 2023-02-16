@@ -61,17 +61,4 @@ class BuildController extends ControllerMakeCommand
 
         return [$storeRequestClass, $updateRequestClass];
     }
-
-    /**
-     * Get the console command options.
-     *
-     * @return array
-     */
-    protected function getOptions()
-    {
-        return [
-            ['force', null, InputOption::VALUE_NONE, 'Create the class even if the controller already exists'],
-            ['model', 'm', InputOption::VALUE_OPTIONAL, 'Generate a resource controller for the given model.']
-        ];
-    }
 }
