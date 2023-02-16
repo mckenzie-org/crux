@@ -104,7 +104,7 @@ class BuildDefinition extends Command {
         $pl_model = Str::plural($model);
         $definitions_path = config('crux.definitions_path');
 
-        return $this->laravel['path'].'/'.$definitions_path.'/'.$pl_model.'.json';
+        return $this->laravel->basePath($definitions_path.'/'.$pl_model.'.json');
     }
 
     /**
