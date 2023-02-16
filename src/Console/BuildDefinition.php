@@ -18,6 +18,18 @@ class BuildDefinition extends Command {
 
     protected $description = 'Build a definition file for the model';
 
+    /**
+     * Create a new controller creator command instance.
+     *
+     * @param  \Illuminate\Filesystem\Filesystem  $files
+     * @return void
+     */
+    public function __construct(Filesystem $files)
+    {
+        parent::__construct();
+        $this->files = $files;
+    }
+
     protected function getStub()
     {
         $stub = '/stubs/crux/definition.json.stub';
