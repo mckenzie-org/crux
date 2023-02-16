@@ -18,11 +18,30 @@ class BuildDefinition extends Command {
 
     protected $description = 'Build a definition file for the model';
 
+    protected function getStub()
+    {
+        $stub = '/stubs/crux/definition.json.stub';
+        return $this->resolveStubPath($stub);
+    }
+
+    /**
+     * Resolve the fully-qualified path to the stub.
+     *
+     * @param  string  $stub
+     * @return string
+     */
+    protected function resolveStubPath($stub)
+    {
+        return file_exists($customPath = $this->laravel->basePath(trim($stub, '/')))
+            ? $customPath
+            : __DIR__.$stub;
+    }
+
     public function handle()
     {
         $model = strtolower($this->argument('name'));
 
-        $path = $this->getPath();
+        $path = $this->getPath($model);
         $this->makeDirectory($path);
         $this->files->put($path, $this->buildDefinition($model));
 
@@ -68,11 +87,12 @@ class BuildDefinition extends Command {
      * @param  string  $name
      * @return string
      */
-    protected function getPath()
+    protected function getPath($model)
     {
+        $pl_model = Str::plural($model);
         $definitions_path = config('crux.definitions_path');
 
-        return $this->laravel['path'].'/'.$definitions_path;
+        return $this->laravel['path'].'/'.$definitions_path.'/'.$pl_model.'.json';
     }
 
     /**
