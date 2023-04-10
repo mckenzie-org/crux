@@ -157,9 +157,14 @@ class CruxModelController extends CruxBaseController {
         $meta = [];
         $filters = [];
         if($request->has('filters')) {
-            $filters = @json_decode($request->filters,true);
+            if(gettype($request->filters) === 'string') {
+                $filters = @json_decode($request->filters,true);
+            } else {
+                $filters = $request->filters;
+            }
             $this->processFilters($filters,$query);
         }
+
 
         if($request->has('with')) {
             $query->with($request->with);
@@ -171,7 +176,11 @@ class CruxModelController extends CruxBaseController {
         ];
 
         if($request->has('sort')) {
-            $sort = @json_decode($request->sort,true);
+            if(gettype($request->sort) === 'string') {
+                $sort = @json_decode($request->sort,true);
+            } else {
+                $sort = $request->sort;
+            }
         }
 
         $results = $query->orderBy($sort['k'],$sort['d'])->get();
