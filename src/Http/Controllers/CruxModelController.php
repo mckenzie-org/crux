@@ -20,7 +20,7 @@ class CruxModelController extends CruxBaseController {
     /**
      * @return JsonResponse
      */
-    public function definition()
+    public function definition($definition_id = null)
     {
         $obj = (new $this->model);
         if(!method_exists($obj,'definition')) {
@@ -32,7 +32,7 @@ class CruxModelController extends CruxBaseController {
                 ]
             ],404);
         }
-        $definition = $obj->definition();
+        $definition = $obj->definition($definition_id);
         return response()->json([
             'status'=>0,
             'definition'=>$definition
@@ -217,6 +217,9 @@ class CruxModelController extends CruxBaseController {
 
         if($request->has('with')) {
             $query->with($request->with);
+        }
+        if($request->has('withCount')) {
+            $query->withCount($request->withCount);
         }
 
         $sort= [

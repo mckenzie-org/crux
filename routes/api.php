@@ -8,7 +8,7 @@ if($resources) {
         $controller = $data['controller'];
         Route::get('/'.$resource.'/paginated', [$controller,'paginated']);
         Route::get('/'.$resource.'/all', [$controller,'all']);
-        Route::get('/'.$resource.'/definition', [$controller,'definition']);
+        Route::get('/'.$resource.'/definition/{definition_id?}', [$controller,'definition']);
         Route::get('/'.$resource.'/{id}', [$controller,'getById']);
         Route::get('/'.$resource.'/{id}/{child}/paginated', [$controller,'childrenPaginated']);
         Route::get('/'.$resource.'/{id}/{child}/all', [$controller,'allChildren']);
