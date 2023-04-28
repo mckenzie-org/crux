@@ -44,10 +44,11 @@ class CruxModelController extends CruxBaseController {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return response()->view('crux::generic.index',[
-            'model'=>$this->modelPlural
+            'model'=>$this->modelPlural,
+            'definition'=>$request->has('d')?$request->input('d'):null
         ]);
     }
 
@@ -407,10 +408,11 @@ class CruxModelController extends CruxBaseController {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         return response()->view('crux::generic.create',[
             'model'=>$this->modelPlural,
+            'definition'=>$request->has('d')?$request->input('d'):null
         ]);
     }
 
@@ -452,11 +454,12 @@ class CruxModelController extends CruxBaseController {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         return response()->view('crux::generic.show',[
             'model'=>$this->modelPlural,
-            'id'=>$id
+            'id'=>$id,
+            'definition'=>$request->has('d')?$request->input('d'):null
         ]);
     }
 
@@ -466,11 +469,12 @@ class CruxModelController extends CruxBaseController {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
         return response()->view('crux::generic.edit',[
             'model'=>$this->modelPlural,
-            'id'=>$id
+            'id'=>$id,
+            'definition'=>$request->has('d')?$request->input('d'):null
         ]);
     }
 
