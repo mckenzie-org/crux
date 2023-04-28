@@ -19,7 +19,7 @@
 
 @section('content')
     <crux-dashboard>
-        <crux-list :model="'{{$model??''}}'" :action="'list'"></crux-list>
+        <crux-list :model="'{{$model??''}}'" defined_by="{{$definition??null}}" :action="'list'"></crux-list>
     </crux-dashboard>
 @endsection
 
