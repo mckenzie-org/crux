@@ -170,6 +170,9 @@ class CruxModelController extends CruxBaseController {
         if($request->has('with')) {
             $query->with($request->with);
         }
+        if($request->has('withCount')) {
+            $query->withCount($request->withCount);
+        }
 
         $sort= [
             'k'=>'id',
