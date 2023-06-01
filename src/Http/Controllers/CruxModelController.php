@@ -189,6 +189,12 @@ class CruxModelController extends CruxBaseController {
 
         $results = $query->orderBy($sort['k'],$sort['d'])->get();
 
+        if($request->has('append') && $request->input('append')) {
+            foreach ($results as $row) {
+                $row->append($request->input('append'));
+            }
+        }
+
         if($request->has('meta')) {
             $mfields = $request->meta;
             $this->processMetadata($query, $mfields, $meta);
@@ -240,7 +246,11 @@ class CruxModelController extends CruxBaseController {
         }
 
         $results = $query->orderBy($sort['k'],$sort['d'])->paginate();
-
+        if($request->has('append') && $request->input('append')) {
+            foreach ($results as $row) {
+                $row->append($request->input('append'));
+            }
+        }
         if($request->has('meta')) {
             $mfields = $request->meta;
             $this->processMetadata($query, $mfields, $meta);
@@ -301,7 +311,11 @@ class CruxModelController extends CruxBaseController {
         }
 
         $results = $query->orderBy($sort['k'],$sort['d'])->paginate();
-
+        if($request->has('append') && $request->input('append')) {
+            foreach ($results as $row) {
+                $row->append($request->input('append'));
+            }
+        }
         if($request->has('meta')) {
             $mfields = $request->meta;
             $this->processMetadata($query, $mfields, $meta);
@@ -309,6 +323,7 @@ class CruxModelController extends CruxBaseController {
 
         return response()->json([
             'status'=>0,
+            '_key'=>$child,
             $child=>$results,
             'metadata'=>$meta
         ]);
@@ -362,7 +377,11 @@ class CruxModelController extends CruxBaseController {
         }
 
         $results = $query->orderBy($sort['k'],$sort['d'])->get();
-
+        if($request->has('append') && $request->input('append')) {
+            foreach ($results as $row) {
+                $row->append($request->input('append'));
+            }
+        }
         if($request->has('meta')) {
             $mfields = $request->meta;
             $this->processMetadata($query, $mfields, $meta);
@@ -370,6 +389,7 @@ class CruxModelController extends CruxBaseController {
 
         return response()->json([
             'status'=>0,
+            '_key'=>$child,
             $child=>$results,
             'metadata'=>$meta
         ]);
@@ -398,7 +418,9 @@ class CruxModelController extends CruxBaseController {
                 ]
             ],404);
         }
-
+        if($request->has('append') && $request->input('append')) {
+            $obj->append($request->input('append'));
+        }
 
         return response()->json([
             'status'=>0,
@@ -430,6 +452,7 @@ class CruxModelController extends CruxBaseController {
         $obj = $this->performSave($validated);
         return response()->json([
             'status'=>0,
+            '_key'=>$this->modelType,
             $this->modelType=>$obj
         ]);
     }
