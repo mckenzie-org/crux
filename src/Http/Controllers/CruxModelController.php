@@ -555,13 +555,7 @@ class CruxModelController extends CruxBaseController {
                 ]
             ],404);
         }
-        if(isset($validated['id'])) {
-            $pivotRowId = $validated['id'];
-            unset($validated['id']);
-            $obj->$child()->newPivotStatement()->where('id', $pivotRowId)->update($validated);
-        } else {
-            $obj->$child()->updateExistingPivot($child_id,$validated);
-        }
+        $obj->$child()->updateExistingPivot($child_id,$validated);
 
         return response()->json(['status'=>0],200);
 
@@ -586,7 +580,7 @@ class CruxModelController extends CruxBaseController {
         return response()->json(['status'=>0]);
     }
 
-    public function detach($id, $child, $child_id, Request $request)
+    public function detach($id, $child, $child_id)
     {
         $obj = $this->model::find($id);
 
@@ -600,14 +594,7 @@ class CruxModelController extends CruxBaseController {
             ],404);
         }
 
-        if($request->has('withId')) {
-            $pivotId = $request->input('withId');
-            $obj->$child()->wherePivot('id',$pivotId)->detach($child_id);
-        } else {
-            $obj->$child()->detach($child_id);
-        }
-
-
+        $obj->$child()->detach($child_id);
 
 
         return response()->json(['status'=>0]);
