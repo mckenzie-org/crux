@@ -118,6 +118,12 @@ class CruxModelController extends CruxBaseController {
 
 
                             break;
+                        case 'custom':
+                            if(isset($filter['_fn']) && method_exists($this,$filter['_fn'])) {
+                                $func = $filter['_fn'];
+                                $this->$func($filter, $query);
+                            }
+                            break;
                     }
                 }
             }
